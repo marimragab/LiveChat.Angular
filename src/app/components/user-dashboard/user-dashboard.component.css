@@ -1,0 +1,42 @@
+.user-data {
+  margin: 80px auto;
+  min-width: 600px;
+  width: 600px;
+  min-height: 350px;
+  text-align: center;
+  border-radius: 20px;
+
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+  box-shadow: rgba(46, 240, 172, 0.4) -5px 5px,
+    rgba(219, 247, 243, 0.163) -10px 10px, rgba(46, 240, 114, 0.2) -15px 15px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50%;
+  background-color: blueviolet;
+}
+
+.chat > button {
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  margin: auto;
+  border: 3px ridge rgb(99, 157, 250);
+  border-radius: 20px;
+  padding: 7px;
+  margin-top: 40px;
+}
