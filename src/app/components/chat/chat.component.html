@@ -1,1 +1,25 @@
-<p>Chat component works</p>
+<div class="chat-container">
+  <div class="chat-header">
+    <img
+      [src]="senderImage"
+      alt="Sender Image"
+      class="sender-image"
+      height="50"
+    />
+    <span class="sender-name">{{ senderName }}</span>
+  </div>
+
+  <div class="message-list">
+    <div *ngFor="let message of messages" class="message">
+      {{ message }}
+    </div>
+  </div>
+
+  <div class="message-input">
+    <textarea
+      [(ngModel)]="newMessage"
+      placeholder="Type your message..."
+    ></textarea>
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>
