@@ -1,20 +1,17 @@
-<!-- <button (click)="sendMessage()">Send</button> -->
-
 <div class="user-data">
   <div class="user-image">
     <img [src]="userImageUrl" alt="user image" height="100" />
   </div>
 
   <div>
-    <h2>User Name</h2>
-    <p>Email</p>
+    <h2>{{ userName }}</h2>
   </div>
 
   <div class="chat">
-    <button (click)="sendMessage()">
+    <button (click)="ChatWithAdmin()">
       <mat-icon
         aria-hidden="false"
-        aria-label="Example home icon"
+        aria-label="Example message icon"
         fontIcon="message"
       ></mat-icon>
     </button>

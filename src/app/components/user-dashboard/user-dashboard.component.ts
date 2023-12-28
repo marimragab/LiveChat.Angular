@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -9,22 +10,24 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class UserDashboardComponent implements OnInit {
   userImageUrl = '../assets/images/user.avif';
-  onlineUsers: any[] = [];
-  sender: number;
-  message: string;
-  date: string;
+  user: any;
+  userName: string;
 
-  chatService = inject(ChatService);
+  authService = inject(AuthService);
   router = inject(Router);
 
-  ngOnInit(): void {}
-  sendMessage() {
-    this.chatService
-      .sendMessage('Hello from user', 1, 2)
-      .then(() => {
-        this.router.navigate(['chat']);
-      })
-      .catch((err) => console.log(err));
+  ngOnInit(): void {
+    var token = localStorage.getItem('token');
+    this.user = this.authService.decodeToken(token);
+    this.userName =
+      this.user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    console.log(this.user);
+    console.log(
+      this.user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+    );
   }
-  // Implement methods to open chat windows, etc.
+
+  ChatWithAdmin() {
+    this.router.navigate(['/chat', 'admin']);
+  }
 }
