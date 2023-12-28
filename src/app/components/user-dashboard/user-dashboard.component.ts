@@ -21,6 +21,7 @@ export class UserDashboardComponent implements OnInit {
     this.user = this.authService.decodeToken(token);
     this.userName =
       this.user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+
     console.log(this.user);
     console.log(
       this.user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
@@ -28,6 +29,6 @@ export class UserDashboardComponent implements OnInit {
   }
 
   ChatWithAdmin() {
-    this.router.navigate(['/chat', 'admin']);
+    this.router.navigate(['/chat']);
   }
 }

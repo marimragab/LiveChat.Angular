@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as signalR from '@microsoft/signalr';
 import {
   HubConnection,
   HubConnectionBuilder,
@@ -11,19 +12,42 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class ChatService {
   private hubConnection: HubConnection | undefined;
-
   messages: Subject<{ user: string; message: string }> = new Subject();
   private connectionEstablished = new BehaviorSubject<boolean>(false);
-  startConnection() {
+  private chatMessagesSubject = new Subject<{
+    senderName: string;
+    message: string;
+    messageDate: string;
+  }>();
+
+  startConnection(authToken: string) {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:44331/chat', { withCredentials: true })
+      .withUrl('https://localhost:44331/chat', {
+        withCredentials: true,
+      })
+      .configureLogging(signalR.LogLevel.Information)
       .build();
 
     this.hubConnection
       .start()
       .then(() => {
         console.log('Connection started');
+        console.log('Connection ID:', this.hubConnection?.connectionId);
         this.connectionEstablished.next(true);
+
+        this.hubConnection.on(
+          'ReceiveMessage',
+          (senderName: string, receivedMessage: string, date: string) => {
+            console.log(
+              `Sender:${senderName} Message:${receivedMessage} Date:${date}`
+            );
+            this.chatMessagesSubject.next({
+              senderName,
+              message: receivedMessage,
+              messageDate: date,
+            });
+          }
+        );
       })
       .catch((err) => console.log('Error while starting connection: ' + err));
   }
@@ -38,15 +62,23 @@ export class ChatService {
     }
   }
 
-  sendMessage(receiverId: string, message: string): void {
+  sendMessage(message: string, senderId: string, receiverId: string): void {
     if (this.hubConnection) {
       this.hubConnection
-        .invoke('SendMessage', receiverId, message)
+        .invoke('SendMessage', message, senderId, receiverId)
         .catch((err) => console.error(err));
     }
   }
 
   getConnectionEstablished(): BehaviorSubject<boolean> {
     return this.connectionEstablished;
+  }
+
+  getChatMessages(): Subject<{
+    senderName: string;
+    message: string;
+    messageDate: string;
+  }> {
+    return this.chatMessagesSubject;
   }
 }

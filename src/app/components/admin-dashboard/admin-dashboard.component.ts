@@ -8,8 +8,11 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class AdminDashboardComponent implements OnInit {
   onlineUsers: any[] = [];
-
+  adminImageUrl: string = '../assets/images/admin-icon.webp';
+  adminName: string;
   constructor(private chatService: ChatService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adminName = localStorage.getItem('adminName');
+  }
 }

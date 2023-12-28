@@ -19,7 +19,9 @@
     <textarea
       [(ngModel)]="message"
       placeholder="Type your message..."
-    ></textarea>
+      (keydown.enter)="sendMessage()"
+    >
+    </textarea>
     <button (click)="sendMessage()">Send</button>
   </div>
 </div>

@@ -1,0 +1,26 @@
+.admin-page {
+  /* background-color: whitesmoke; */
+  width: 90%;
+  height: 100vh;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-evenly;
+}
+
+.admin-data {
+  /* background-color: blueviolet; */
+  width: 35%;
+}
+
+.chat-area {
+  /* background-color: brown; */
+  width: 65%;
+}
+
+.admin-data,
+.chat-area {
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 1px 0.5px 2px 3px rgb(178, 176, 176);
+  background-color: white;
+}

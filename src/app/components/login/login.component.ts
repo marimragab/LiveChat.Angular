@@ -28,10 +28,36 @@ export class LoginComponent {
           this.decodedToken[
             'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
           ].includes('Admin');
+        console.log(this.decodedToken);
         if (isAdmin) {
           this.router.navigate(['/admin']);
+          localStorage.setItem(
+            'adminId',
+            this.decodedToken[
+              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+            ]
+          );
+
+          localStorage.setItem(
+            'adminName',
+            this.decodedToken[
+              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+            ]
+          );
         } else {
           this.router.navigate(['/user']);
+          localStorage.setItem(
+            'userId',
+            this.decodedToken[
+              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+            ]
+          );
+          localStorage.setItem(
+            'userName',
+            this.decodedToken[
+              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+            ]
+          );
         }
       },
       (error) => {

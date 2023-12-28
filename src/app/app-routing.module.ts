@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   { path: 'user', component: UserDashboardComponent },
   { path: 'admin', component: AdminDashboardComponent },
-  { path: 'chat/:userId', component: ChatComponent },
+  // { path: 'chat/admin', component: ChatComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'login', component: LoginComponent },
 ];
